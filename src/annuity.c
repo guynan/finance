@@ -1,7 +1,7 @@
 
 #include <stdint.h>
 #include <math.h>
-#include "annuity.h"
+#include "finance.h"
 
 
 /* FV = PV (1 + r)**n */
@@ -22,3 +22,7 @@ double annuity_factor(double rate, uint32_t n)
         return pow(1 + rate, n);
 }
 
+double pv_annuity_cash_flows(double cf, double r, double n)
+{
+        return cf / (r - (r * annuity_factor(r, n)));
+}

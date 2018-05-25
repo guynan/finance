@@ -2,7 +2,7 @@
 #ifndef __PYMOD_INIT__
 #define __PYMOD_INIT__
 
-#include "annuity.h"
+#include "finance.h"
 
 
 /*
@@ -12,16 +12,17 @@
 
 
 /* Externally visible Python functions */
+
+/* Annuity */
 static PyObject* C_fv_annuity(PyObject* self, PyObject* args);
 static PyObject* C_pv_annuity(PyObject* self, PyObject* args);
 static PyObject* C_annuity_factor(PyObject* self, PyObject* args);
-/*
-static PyObject* C_parseArray(PyObject* self, PyObject* args);
-static PyObject* C_large_init(PyObject* self, PyObject* args);
-static PyObject * C_GoisPrime(PyObject* self, PyObject* args);
-static PyObject* C_returnslice(PyObject* self, PyObject* args);
-*/
+static PyObject* C_pv_annuity_cash_flows(PyObject* self, PyObject* args);
 
+/* Bonds */
+static PyObject* C_bond_price(PyObject* self, PyObject* args);
+static PyObject* C_yield_to_maturity(PyObject* self, PyObject* args);
+static PyObject* C_coupon_rate(PyObject* self, PyObject* args);
 
 /* Python Initialisation */
 PyMODINIT_FUNC init_finance(void);
@@ -52,6 +53,20 @@ static PyMethodDef ModuleMethods[] = {
 
         {"annuity_factor",  C_annuity_factor, METH_VARARGS,
         "Calculate the annuity factor with given r, n."},
+
+        {"bond_price",  C_bond_price, METH_VARARGS,
+        "Calculate the bond price with coupon price, discount rate, par value"
+        " and the number of periods."
+        },
+
+        {"yield_to_maturity",  C_yield_to_maturity, METH_VARARGS,
+        "Calculate the expected rate of return on a bond."},
+
+        {"coupon_rate",  C_coupon_rate, METH_VARARGS,
+        "Calculate the coupon rate of a bond."},
+
+        {"pv_annuity_cash_flows", C_pv_annuity_cash_flows, METH_VARARGS,
+        "Calculate present value of an annuity with constant cash flows."},
 
         /* Sentinel */
         {NULL, NULL, 0, NULL}

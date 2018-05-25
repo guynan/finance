@@ -77,3 +77,85 @@ cleanup:
 
 }
 
+
+static PyObject* C_bond_price(PyObject* self, PyObject* args)
+{
+        (void) self;
+
+        double cp, rd, face;
+        uint32_t n;
+
+        double res = 0.0;
+
+        if(!PyArg_ParseTuple(args, "dddI", &cp, &rd, &face, &n))
+                goto cleanup;
+
+        res = bond_price(cp, rd, face, n);
+
+cleanup:
+
+        return Py_BuildValue("d", res);
+
+}
+
+
+static PyObject* C_yield_to_maturity(PyObject* self, PyObject* args)
+{
+        (void) self;
+
+        double cp, bp, face;
+        uint32_t n;
+
+        double res = 0.0;
+
+        if(!PyArg_ParseTuple(args, "dddI", &cp, &bp, &face, &n))
+                goto cleanup;
+
+        res = yield_to_maturity(cp, bp, face, n);
+
+cleanup:
+
+        return Py_BuildValue("d", res);
+
+}
+
+
+static PyObject* C_coupon_rate(PyObject* self, PyObject* args)
+{
+        (void) self;
+
+        double ytm, bp, face;
+        uint32_t n;
+
+        double res = 0.0;
+
+        if(!PyArg_ParseTuple(args, "dddI", &bp, &ytm, &face, &n))
+                goto cleanup;
+
+        res = coupon_rate(bp, ytm, face, n);
+
+cleanup:
+
+        return Py_BuildValue("d", res);
+
+}
+
+static PyObject* C_pv_annuity_cash_flows(PyObject* self, PyObject* args)
+{
+        (void) self;
+
+        double cf, r;
+        uint32_t n;
+
+        double res = 0.0;
+
+        if(!PyArg_ParseTuple(args, "dddI", &cf, &r, &n))
+                goto cleanup;
+
+        res = pv_annuity_cash_flows(cf, r, n);
+
+cleanup:
+
+        return Py_BuildValue("d", res);
+
+}
