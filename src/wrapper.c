@@ -2,6 +2,8 @@
 /* Python.h impiles `stdio, stdlib, etc` */
 
 #include <Python.h>
+#include <stddef.h>
+#include <math.h>
 #include "wrapper.h"
 
 
@@ -160,6 +162,25 @@ cleanup:
 
 }
 
+static PyObject* C_curr_adj_return(PyObject* self, PyObject* args)
+{
+        (void) self;
+
+        double rr, begin, end;
+
+        double res = 0.0;
+
+        if(!PyArg_ParseTuple(args, "ddd", &rr, &begin, &end))
+                goto cleanup;
+
+        res = currency_adjusted_return(rr, begin, end);
+
+cleanup:
+
+        return Py_BuildValue("d", res);
+
+}
+
 static PyObject* C_real_returns(PyObject* self, PyObject* args)
 {
         (void) self;
@@ -172,6 +193,32 @@ static PyObject* C_real_returns(PyObject* self, PyObject* args)
                 goto cleanup;
 
         res = real_return(nominal, inflation);
+
+cleanup:
+
+        return Py_BuildValue("d", res);
+
+}
+
+static PyObject* C_geometric_mean(PyObject* self, PyObject* args)
+{
+        (void) self;
+
+        PyObject* hprs;
+
+        double res = 1.0;
+
+        if(!PyArg_ParseTuple(args, "O!", &PyList_Type, &hprs))
+                goto cleanup;
+
+        size_t hpr_len = PyList_Size(hprs);
+
+        for(size_t i = 0; i < hpr_len; i++){
+                res *= (1.0 + PyFloat_AsDouble(PyList_GetItem(hprs, i)));
+        }
+
+        res = pow(res, 1.0/hpr_len) - 1.0;
+
 
 cleanup:
 

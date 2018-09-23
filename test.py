@@ -21,5 +21,8 @@ def main():
 
     print(f.bond_price(85.0 / 2, 0.0523/2, 1000, 6 * 2));
     print(f.real_return(0.0381, 0.02));
+    print(f.currency_adjusted_return(7909 / 9868.0, 2.3697, 1.7724));
+
+    print(f.geometric_mean([0.1, 0.25, -0.2,0.2]));
 
 main();

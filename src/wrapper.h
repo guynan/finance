@@ -26,6 +26,10 @@ static PyObject* C_coupon_rate(PyObject* self, PyObject* args);
 
 /* Returns */
 static PyObject* C_real_returns(PyObject* self, PyObject* args);
+static PyObject* C_curr_adj_return(PyObject* self, PyObject* args);
+
+/* Statistics */
+static PyObject* C_geometric_mean(PyObject* self, PyObject* args);
 
 /* Python Initialisation */
 PyMODINIT_FUNC init_finance(void);
@@ -74,6 +78,14 @@ static PyMethodDef ModuleMethods[] = {
         {"real_return", C_real_returns, METH_VARARGS,
         "Calculate the real return based upon the nominal return and"
         "inflation rate, according to the Fisher Equation"},
+
+        {"currency_adjusted_return", C_curr_adj_return, METH_VARARGS,
+        "Calculate the return in a local currency with respect to"
+        " the returns on an international currency where the "
+        "real return was received"},
+
+        {"geometric_mean", C_geometric_mean, METH_VARARGS,
+        "Calculate the geometric mean based upon a Python List of HPR."},
 
         /* Sentinel */
         {NULL, NULL, 0, NULL}

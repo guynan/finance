@@ -1,5 +1,6 @@
 
 #include <stdint.h>
+#include <stddef.h>
 
 
 /* In the absence of specification this is the value that will be used */
@@ -18,3 +19,8 @@ double yield_to_maturity(double cp, double bp, double face, int32_t n);
 
 /* Returns Prototypes */
 double real_return(double nominal, double inflation);
+double currency_adjusted_return(double real_return, double begin, double end);
+
+/* Statisical measures */
+double geometric_mean(double* hprs, size_t n_elem);
+

@@ -18,10 +18,13 @@ bonds.o:
 returns.o:
 	gcc -shared -fPIC $(CFLAGS) -c src/returns.c -I $(PY_DEV_PATH) -lm
 
+statistics.o:
+	gcc -shared -fPIC $(CFLAGS) -c src/statistics.c -I $(PY_DEV_PATH) -lm
+
 wrapper.o: src/wrapper.h
 	gcc -shared -fPIC $(CFLAGS) -c src/wrapper.c -I $(PY_DEV_PATH)
 
-finance.so: annuity.o bonds.o returns.o wrapper.o 
+finance.so: annuity.o bonds.o returns.o statistics.o wrapper.o 
 	gcc -shared -fPIC $(CFLAGS) -o $(CLIB) -I $(PY_DEV_PATH) *.o
 
 test:
