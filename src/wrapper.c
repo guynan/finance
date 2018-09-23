@@ -159,3 +159,23 @@ cleanup:
         return Py_BuildValue("d", res);
 
 }
+
+static PyObject* C_real_returns(PyObject* self, PyObject* args)
+{
+        (void) self;
+
+        double nominal, inflation;
+
+        double res = 0.0;
+
+        if(!PyArg_ParseTuple(args, "dd", &nominal, &inflation))
+                goto cleanup;
+
+        res = real_return(nominal, inflation);
+
+cleanup:
+
+        return Py_BuildValue("d", res);
+
+}
+

@@ -20,5 +20,6 @@ def main():
     print(f.coupon_rate(1053.46, 0.06, 1000, 3));
 
     print(f.bond_price(85.0 / 2, 0.0523/2, 1000, 6 * 2));
+    print(f.real_return(0.0381, 0.02));
 
 main();

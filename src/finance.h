@@ -16,3 +16,5 @@ double bond_price(double cp, double rd, double face, int32_t n);
 double coupon_rate(double bp, double ytm, double face, int32_t n);
 double yield_to_maturity(double cp, double bp, double face, int32_t n);
 
+/* Returns Prototypes */
+double real_return(double nominal, double inflation);

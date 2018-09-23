@@ -24,6 +24,9 @@ static PyObject* C_bond_price(PyObject* self, PyObject* args);
 static PyObject* C_yield_to_maturity(PyObject* self, PyObject* args);
 static PyObject* C_coupon_rate(PyObject* self, PyObject* args);
 
+/* Returns */
+static PyObject* C_real_returns(PyObject* self, PyObject* args);
+
 /* Python Initialisation */
 PyMODINIT_FUNC init_finance(void);
 
@@ -67,6 +70,10 @@ static PyMethodDef ModuleMethods[] = {
 
         {"pv_annuity_cash_flows", C_pv_annuity_cash_flows, METH_VARARGS,
         "Calculate present value of an annuity with constant cash flows."},
+
+        {"real_return", C_real_returns, METH_VARARGS,
+        "Calculate the real return based upon the nominal return and"
+        "inflation rate, according to the Fisher Equation"},
 
         /* Sentinel */
         {NULL, NULL, 0, NULL}
